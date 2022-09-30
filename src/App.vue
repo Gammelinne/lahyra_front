@@ -11,6 +11,9 @@
           v-if="loggedIn"
           to="/dashboard"
         >Dashboard</b-nav-item>
+        <b-nav-item v-if="!loggedIn" to="/register">
+          Register
+        </b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
         <b-nav-item
@@ -44,6 +47,7 @@ export default {
     };
   },
   mounted() {
+    axios.defaults.baseURL = "https://server.lahyra.com/Lahyra-back/";
     this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user) {
       this.loggedIn = true;
@@ -51,7 +55,6 @@ export default {
   },
   methods: {
     logoutAccount() {
-      console.log(JSON.parse(localStorage.getItem("user")));
       axios
         .post("/api/logout")
         .then((response) => {
@@ -67,7 +70,7 @@ export default {
             variant: "danger",
             solid: true,
           });
-        })
+        });
     },
   },
 };
