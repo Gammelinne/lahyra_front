@@ -1,13 +1,77 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <b-navbar
+      type="dark"
+      variant="dark"
+    >
+      <b-navbar-brand to="/">Lahyra</b-navbar-brand>
+      <b-navbar-nav>
+        <b-nav-item to="/">Home</b-nav-item>
+        <b-nav-item
+          v-if="loggedIn"
+          to="/dashboard"
+        >Dashboard</b-nav-item>
+      </b-navbar-nav>
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item
+          v-if="!loggedIn"
+          to="/login"
+        >Login</b-nav-item>
+        <b-nav-item
+          v-if="loggedIn"
+          @click="logoutAccount"
+        >Logout</b-nav-item>
+      </b-navbar-nav>
+    </b-navbar>
+    <router-view />
   </div>
 </template>
-
+<script>
+import axios from "axios";
+if (localStorage.getItem("user")) {
+  axios.interceptors.request.use((config) => {
+    const token = JSON.parse(localStorage.getItem("user")).token;
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  });
+}
+export default {
+  name: "App",
+  data() {
+    return {
+      user: null,
+      loggedIn: false,
+    };
+  },
+  mounted() {
+    this.user = JSON.parse(localStorage.getItem("user"));
+    if (this.user) {
+      this.loggedIn = true;
+    }
+  },
+  methods: {
+    logoutAccount() {
+      console.log(JSON.parse(localStorage.getItem("user")));
+      axios
+        .post("/api/logout")
+        .then((response) => {
+          if (response.data.message === "Successfully logged out") {
+            localStorage.removeItem("user");
+            this.$router.go("/");
+            this.loggedIn = false;
+          }
+        })
+        .catch(() => {
+          this.$bvToast.toast("Something went wrong", {
+            title: "Error",
+            variant: "danger",
+            solid: true,
+          });
+        })
+    },
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
