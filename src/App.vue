@@ -4,7 +4,8 @@
       type="dark"
       variant="dark"
     >
-      <b-navbar-brand to="/">Lahyra</b-navbar-brand>
+      <b-navbar-brand to="/" class="mx-3">Lahyra</b-navbar-brand>
+
       <b-navbar-nav>
         <b-nav-item to="/">Home</b-nav-item>
         <b-nav-item

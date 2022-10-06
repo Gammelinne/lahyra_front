@@ -1,9 +1,7 @@
 <template>
   <div class="register">
-    <h1>Register</h1>
-    <p>This is the register page.</p>
+    <h1>Welcome to Lahyra</h1>
     <b-card
-      title="Register"
       class="mx-auto my-5"
       style="max-width: 400px"
     >
