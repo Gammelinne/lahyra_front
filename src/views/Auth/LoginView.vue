@@ -24,6 +24,10 @@
           placeholder="Enter password"
         ></b-form-input>
       </b-input-group>
+      <vue-recaptcha
+        ref="recaptcha"
+        sitekey="6LcMZZwiAAAAANjt8vA3ImwtiVJwRibO79wTwRW1"
+      />
       <b-button
         @click="login"
         variant="primary"
@@ -35,8 +39,10 @@
 
 <script>
 import axios from "axios";
+import { VueRecaptcha } from "vue-recaptcha";
 export default {
   name: "LoginView",
+  components: { VueRecaptcha },
   data() {
     return {
       email: null,
