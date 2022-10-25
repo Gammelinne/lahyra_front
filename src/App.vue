@@ -4,27 +4,66 @@
       type="dark"
       variant="dark"
     >
-      <b-navbar-brand to="/" class="mx-3">Lahyra</b-navbar-brand>
+      <b-navbar-brand to="/">
+        <b-img
+          src="https://i.ibb.co/FhQzwwh/logo-lahyra.png"
+          width="25"
+          height="25"
+        ></b-img>
+        Lahyra
+      </b-navbar-brand>
 
-      <b-navbar-nav>
-        <b-nav-item to="/">Home</b-nav-item>
+      <b-navbar-nav class="mx-2">
+        <b-nav-item to="/">
+          <b-icon
+            icon="house-door-fill"
+            font-scale="1"
+          ></b-icon><br>
+          Home
+        </b-nav-item>
         <b-nav-item
           v-if="loggedIn"
           to="/dashboard"
-        >Dashboard</b-nav-item>
-        <b-nav-item v-if="!loggedIn" to="/register">
-          Register
+        >
+          <b-icon
+            icon="person-fill"
+            font-scale="1"
+          ></b-icon><br>
+          Dashboard
         </b-nav-item>
+
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
         <b-nav-item
           v-if="!loggedIn"
+          to="/register"
+        >
+          <b-icon
+            icon="person-plus-fill"
+            font-scale="1"
+          ></b-icon><br>
+          Register
+        </b-nav-item>
+        <b-nav-item
+          v-if="!loggedIn"
           to="/login"
-        >Login</b-nav-item>
+        >
+          <b-icon
+            icon="box-arrow-in-right"
+            font-scale="1"
+          ></b-icon><br>
+          Login
+        </b-nav-item>
         <b-nav-item
           v-if="loggedIn"
           @click="logoutAccount"
-        >Logout</b-nav-item>
+        >
+          <b-icon
+            icon="person-dash-fill"
+            font-scale="1"
+          ></b-icon><br>
+          Logout
+        </b-nav-item>
       </b-navbar-nav>
     </b-navbar>
     <router-view />
@@ -48,7 +87,8 @@ export default {
     };
   },
   mounted() {
-    axios.defaults.baseURL = "https://server.lahyra.com/Lahyra-back/";
+    //axios.defaults.baseURL = "https://server.lahyra.com/Lahyra-back/"; //production
+    axios.defaults.baseURL = "http://localhost:8525/lahyra_back/public/"; //development
     this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user) {
       this.loggedIn = true;
@@ -78,23 +118,12 @@ export default {
 </script>
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: #f5f5f5;
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
