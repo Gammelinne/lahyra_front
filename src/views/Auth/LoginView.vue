@@ -6,8 +6,7 @@
     <b-card
       title="Login"
       sub-title="Welcome back!"
-      class="mx-auto my-5"
-      style="max-width: 300px"
+      class="mx-auto mb-5"
     >
       <span
         v-if="errors.login"
@@ -19,7 +18,7 @@
       >{{ errors.length }}</span>
       <b-input-group
         class="mb-3"
-        size="sm"
+        size="md"
       >
 
         <b-form-input
@@ -31,7 +30,7 @@
       </b-input-group>
       <b-input-group
         class="mb-3"
-        size="sm"
+        size="md"
       >
         <b-form-input
           :state="errors.login ? false : null"
@@ -54,10 +53,14 @@
       />
       <b-button
         @click="login"
-        variant="primary"
+        variant="outline-primary"
         class="mt-3"
+        pill
+        block
       >
-        Loggin</b-button>
+        Login</b-button>
+      <p class="my-2">Don't have an account? <router-link to="/register">Register</router-link>
+      </p>
     </b-card>
   </div>
 </template>
@@ -132,15 +135,10 @@ export default {
 
 <style>
 #login {
+  height: 90vh;
   background-color: #ff7700;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23cc0000' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23aa0000' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23ca002c' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23a70022' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23c6004c' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23a3003c' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23c0006a' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%239d0055' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23b7008a' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%2394006e' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23aa00aa' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23880088' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
   background-attachment: fixed;
   background-size: cover;
-}
-#recaptcha {
-  transform: scale(0.85);
-  -webkit-transform: scale(0.85);
-  transform-origin: 0 0;
-  -webkit-transform-origin: 0 0;
 }
 </style>

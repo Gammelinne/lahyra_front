@@ -4,7 +4,7 @@
       type="dark"
       variant="dark"
     >
-      <b-navbar-brand to="/">
+      <b-navbar-brand to="/" id="title">
         <b-img
           src="https://i.ibb.co/FhQzwwh/logo-lahyra.png"
           width="25"
@@ -67,6 +67,42 @@
       </b-navbar-nav>
     </b-navbar>
     <router-view />
+    <footer>
+      <div id="link">
+        <a href="https://github.com/Gammelinne" target="_blank">
+          <b-icon
+            class="mx-2 my-2"
+            icon="github"
+            font-scale="1"
+          ></b-icon>
+        </a>
+        <a href="https://www.linkedin.com/in/kylian-renault/" target="_blank">
+          <b-icon
+            class="mx-2 my-2"
+            icon="linkedin"
+            font-scale="1"
+          ></b-icon>
+        </a>
+        <a href="">
+          <b-icon
+            class="mx-2 my-2"
+            icon="instagram"
+            font-scale="1"
+          ></b-icon>
+        </a>
+      </div>
+      <div>
+        Lahyra &copy; 2021 - All rights reserved - Made with <b-icon
+          icon="heart-fill"
+          font-scale="1"
+        ></b-icon> by
+        RENAULT Kylian -
+        <a href="">Terms of Service</a> -
+        <a href="">Privacy Policy</a> -
+        <a href="">Cookie Policy</a> -
+        <a href="">GDPR</a>
+      </div>
+    </footer>
   </div>
 </template>
 <script>
@@ -116,14 +152,22 @@ export default {
   },
 };
 </script>
+
 <style>
 #app {
-  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   background-color: #f5f5f5;
 }
-
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 7vh;
+  background-color: #343a40;
+  color: white;
+}
 </style>
