@@ -4,7 +4,10 @@
       type="dark"
       variant="dark"
     >
-      <b-navbar-brand to="/" id="title">
+      <b-navbar-brand
+        to="/"
+        id="title"
+      >
         <b-img
           src="https://i.ibb.co/FhQzwwh/logo-lahyra.png"
           width="25"
@@ -69,14 +72,20 @@
     <router-view />
     <footer>
       <div id="link">
-        <a href="https://github.com/Gammelinne" target="_blank">
+        <a
+          href="https://github.com/Gammelinne"
+          target="_blank"
+        >
           <b-icon
             class="mx-2 my-2"
             icon="github"
             font-scale="1"
           ></b-icon>
         </a>
-        <a href="https://www.linkedin.com/in/kylian-renault/" target="_blank">
+        <a
+          href="https://www.linkedin.com/in/kylian-renault/"
+          target="_blank"
+        >
           <b-icon
             class="mx-2 my-2"
             icon="linkedin"
@@ -96,7 +105,7 @@
           icon="heart-fill"
           font-scale="1"
         ></b-icon> by
-        RENAULT Kylian -
+        RENAULT Kylian
         <a href="">Terms of Service</a> -
         <a href="">Privacy Policy</a> -
         <a href="">Cookie Policy</a> -
@@ -118,6 +127,12 @@ export default {
   name: "App",
   data() {
     return {
+      value: null,
+      option:[
+        {name: 'test'},
+        {name: 'test2'},
+        {name: 'test3'},
+      ],
       user: null,
       loggedIn: false,
     };
@@ -155,7 +170,7 @@ export default {
 
 <style>
 #app {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -163,10 +178,7 @@ export default {
   background-color: #f5f5f5;
 }
 footer {
-  position: fixed;
   bottom: 0;
-  width: 100%;
-  height: 7vh;
   background-color: #343a40;
   color: white;
 }

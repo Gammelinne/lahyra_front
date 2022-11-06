@@ -12,15 +12,25 @@
 </template>
 
 <script>
+//import axios from "axios";
 export default {
     name: "DashboardView",
     data() {
         return {
-
+          user: {
+            first_name: null,
+            last_name: null,
+            email: null,
+            
+          },
         }
     },
     created() {
-
+        if (!localStorage.getItem("user")) {
+            this.$router.push("/login");
+        }else{
+            this.$parent.loggedIn = true;
+        }
     },
 };
 </script>
