@@ -151,8 +151,8 @@ export default {
     };
   },
   mounted() {
-    //axios.defaults.baseURL = "https://server.lahyra.com/lahyra-back/"; //production
-    axios.defaults.baseURL = "http://localhost:8525/lahyra_back/"; //development
+    axios.defaults.baseURL = "https://server.lahyra.com/lahyra-back/"; //production
+    //axios.defaults.baseURL = "http://localhost:8525/lahyra_back/"; //development
     this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user) {
       this.loggedIn = true;
