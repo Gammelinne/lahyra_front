@@ -26,15 +26,25 @@
               </b-form-select-option>
             </template>
           </b-form-select>
+          <b-form-invalid-feedback v-if="errors.gender">
+            {{ errors.gender }}
+          </b-form-invalid-feedback>
         </b-input-group>
         <b-row class="mt-4">
           <b-col>
-            <b-input-group class="mb-3">
+            <b-input-group class="mb-3"
+            >
               <b-form-input
                 v-model="login.first_name"
                 placeholder="First Name"
                 type="text"
+                :state="state('first_name')"
+
               ></b-form-input>
+              <b-form-invalid-feedback v-if="errors.first_name">
+                {{ errors.first_name[0] }}
+              </b-form-invalid-feedback>
+             
             </b-input-group>
           </b-col>
           <b-col>
@@ -43,7 +53,11 @@
                 v-model="login.last_name"
                 type="text"
                 placeholder="Last Name"
+                :state="state('last_name')"
               ></b-form-input>
+              <b-form-invalid-feedback v-if="errors.last_name">
+                {{ errors.last_name[0] }}
+              </b-form-invalid-feedback>
             </b-input-group>
           </b-col>
         </b-row>
@@ -58,14 +72,22 @@
             v-model="login.pseudo"
             type="text"
             placeholder="Pseudo"
+            :state="state('pseudo')"
           ></b-form-input>
+          <b-form-invalid-feedback v-if="errors.pseudo">
+            {{ errors.pseudo[0] }}
+          </b-form-invalid-feedback>
         </b-input-group>
         <b-input-group class="mb-3">
           <b-form-input
             v-model="login.email"
             type="email"
             placeholder="Email"
+            :state="state('email')"
           ></b-form-input>
+          <b-form-invalid-feedback v-if="errors.email">
+            {{ errors.email[0] }}
+          </b-form-invalid-feedback>
         </b-input-group>
         <b-row>
           <b-col>
@@ -74,7 +96,11 @@
                 v-model="login.phone"
                 type="text"
                 placeholder="Phone"
+                :state="state('phone')"
               ></b-form-input>
+              <b-form-invalid-feedback v-if="errors.phone">
+                {{ errors.phone[0] }}
+              </b-form-invalid-feedback>
             </b-input-group>
           </b-col>
           <b-col>
@@ -87,7 +113,11 @@
                 v-model="login.birthday"
                 type="date"
                 placeholder="Birthday"
+                :state="state('birthday')"
               ></b-form-input>
+              <b-form-invalid-feedback v-if="errors.birthday">
+                {{ errors.birthday[0] }}
+              </b-form-invalid-feedback>
             </b-input-group>
           </b-col>
         </b-row>
@@ -96,7 +126,14 @@
             v-model="login.password"
             type="password"
             placeholder="Password"
+            :state="state('password')"
           ></b-form-input>
+          <!-- invalid-feedback -->
+
+          <b-form-invalid-feedback v-if="errors.password">
+            Password must contain at between 8 and 32 characters with 1 number and 1 uppercase letter and 1 lowercase letter
+          </b-form-invalid-feedback>
+
         </b-input-group>
         <b-input-group class="mb-3">
           <b-form-input
@@ -122,7 +159,11 @@
             v-model="postal_code"
             type="text"
             placeholder="Postal Code"
+            :state="state('postal_code')"
           ></b-form-input>
+          <b-form-invalid-feedback v-if="errors.postal_code">
+            {{ errors.postal_code }}
+          </b-form-invalid-feedback>
         </b-input-group>
         <b-input-group class="mb-3">
           <VueMultiselect
@@ -179,6 +220,7 @@ export default {
         birthday: null,
         recaptha_token: null,
       },
+      errors: {},
       gender_options: ["male", "female", "other"],
       is_mobile: false,
       postal_code: null,
@@ -218,15 +260,25 @@ export default {
         });
     },
     register() {
-      axios.post("/api/register", this.login).then((response) => {
-        if (response.data[0] === "success") {
-          //save user data to local storage
-          localStorage.setItem("user", JSON.stringify(response.data));
-          //redirect to home page
-          this.$router.go();
-          this.$parent.loggedIn = true;
-        }
-      });
+      axios
+        .post("/api/register", this.login)
+        .then((response) => {
+          if (response.data[0] === "success") {
+            //save user data to local storage
+            localStorage.setItem("user", JSON.stringify(response.data));
+            //redirect to home page
+            this.$router.go();
+            this.$parent.loggedIn = true;
+          }
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
+    },
+    state(field) {
+      if (this.errors[field]) {
+        return false;
+      }
     },
   },
 };
@@ -234,7 +286,7 @@ export default {
 
 <style>
 #register {
-  height: 115vh;
+  height: 130vh;
   background-color: #6ac3ff;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%236a9ccc' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%231e1faa' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%235f8cc8' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23251ea3' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23537cc3' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%232d1d9c' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23486abf' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23331d95' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23415ab6' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23391d8f' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%233d4caa' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%233e1c88' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
   background-attachment: fixed;

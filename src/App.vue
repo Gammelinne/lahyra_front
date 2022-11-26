@@ -37,6 +37,23 @@
 
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
+        <!--<b-nav-form v-if="loggedIn">
+          <b-form-input
+            v-model="search"
+            placeholder="Search"
+            size="sm"
+          ></b-form-input>
+          <b-list-group
+            v-for="item in filteredItems"
+            :key="item.id"
+          >
+            <b-list-group-item>
+              <b-link :to="item.link">
+                {{ item.name }}
+              </b-link>
+            </b-list-group-item>
+          </b-list-group>
+        </b-nav-form>-->
         <b-nav-item
           v-if="!loggedIn"
           to="/register"
@@ -128,18 +145,14 @@ export default {
   data() {
     return {
       value: null,
-      option:[
-        {name: 'test'},
-        {name: 'test2'},
-        {name: 'test3'},
-      ],
+      option: [{ name: "test" }, { name: "test2" }, { name: "test3" }],
       user: null,
       loggedIn: false,
     };
   },
   mounted() {
-    //axios.defaults.baseURL = "https://server.lahyra.com/Lahyra-back/"; //production
-    axios.defaults.baseURL = "http://localhost:8525/lahyra_back/public/"; //development
+    //axios.defaults.baseURL = "https://server.lahyra.com/lahyra-back/"; //production
+    axios.defaults.baseURL = "http://localhost:8525/lahyra_back/"; //development
     this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user) {
       this.loggedIn = true;
@@ -162,6 +175,9 @@ export default {
             variant: "danger",
             solid: true,
           });
+          localStorage.removeItem("user");
+          this.$router.go("/");
+          this.loggedIn = false;
         });
     },
   },
@@ -170,7 +186,7 @@ export default {
 
 <style>
 #app {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
