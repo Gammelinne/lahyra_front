@@ -132,7 +132,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 120vh;
+  height: 100vh;
 }
 #services {
   background-color: #f8f9fa;
