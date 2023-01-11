@@ -264,11 +264,7 @@ export default {
         .post("/api/register", this.login)
         .then((response) => {
           if (response.data[0] === "success") {
-            //save user data to local storage
-            localStorage.setItem("user", JSON.stringify(response.data));
-            //redirect to home page
-            this.$router.go();
-            this.$parent.loggedIn = true;
+            this.$router.push("/login");
           }
         })
         .catch((error) => {
